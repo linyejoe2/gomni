@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"regexp"
+	"strings"
 
 	"github.com/linyejoe2/gomni/utils"
 )
@@ -41,9 +41,9 @@ func getRemote(remoteStr string) error {
 func connectRemote(remote *utils.Remote) error {
 	var cmd *exec.Cmd
 
-	out, err := exec.Command("sshpass").CombinedOutput()
+	_, err := exec.Command("sshpass").CombinedOutput()
 	if err != nil {
-		if string(regexp.MustCompile(`No such file or directory`).Find(out)) != "" {
+		if strings.Contains(fmt.Sprint(err), "not found") {
 			return fmt.Errorf("Need to install sshpass first, run 'apt-get install sshpass'.")
 		}
 	}
@@ -51,7 +51,7 @@ func connectRemote(remote *utils.Remote) error {
 	if remote.Auth.PrivateKey != "" {
 		cmd = exec.Command("ssh", "-i", remote.Auth.PrivateKey, fmt.Sprintf("%s@%s", remote.Auth.Username, remote.IP))
 	} else {
-		cmd = exec.Command("sshpass", "-p", remote.Auth.Password, "ssh", fmt.Sprintf("%s@%s", remote.Auth.Username, remote.IP))
+		cmd = exec.Command("sshpass", "-p", remote.Auth.Password, "ssh", "-o", "StrictHostKeyChecking=no", fmt.Sprintf("%s@%s", remote.Auth.Username, remote.IP))
 	}
 
 	// bind std io to this terminal

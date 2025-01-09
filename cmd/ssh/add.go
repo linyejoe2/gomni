@@ -11,25 +11,29 @@ import (
 var (
 	username string
 	password string
-	name     string
+	hostName string
 	keyFile  string
 )
 
 var addCmd = &cobra.Command{
-	Use:   "add <ip> -u <username> -p <password> or -i <certificate file>",
+	Use:   "add <ip> -n <hostname> -u <username> -p <password> or -i <certificate file>",
 	Short: "Add a new SSH remote",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ip := args[0]
+		if hostName == "" {
+			fmt.Println("Invalid input, must provide hostname with -n flag.")
+			return
+		}
 		if username != "" && password != "" {
 			fmt.Printf("Adding remote %s with password auth\n", ip)
 		} else if keyFile != "" {
 			fmt.Printf("Adding remote %s with certificate\n", ip)
 		} else {
-			fmt.Println("Invalid input, must provide either username/password with or certificate")
+			fmt.Println("Invalid input, must provide either username/password or certificate")
 			return
 		}
-		err := addRemote(ip, name, username, password, keyFile)
+		err := addRemote(ip, hostName, username, password, keyFile)
 		if err != nil {
 			panic(err)
 		}
@@ -74,5 +78,5 @@ func init() {
 	addCmd.Flags().StringVarP(&username, "username", "u", "", "Username for SSH")
 	addCmd.Flags().StringVarP(&password, "password", "p", "", "Password for SSH")
 	addCmd.Flags().StringVarP(&keyFile, "identify", "i", "", "Private key file for SSH")
-	addCmd.Flags().StringVarP(&name, "name", "n", "", "Remote name")
+	addCmd.Flags().StringVarP(&hostName, "name", "n", "", "Remote name")
 }
