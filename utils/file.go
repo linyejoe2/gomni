@@ -6,20 +6,6 @@ import (
 	"path/filepath"
 )
 
-type Remote struct {
-	IP   string `json:"ip"`
-	Name string `json:"name"`
-	Auth struct {
-		Username   string `json:"username"`
-		Password   string `json:"password"`
-		PrivateKey string `json:"private_key"`
-	} `json:"auth"`
-}
-
-type Remotes struct {
-	Remotes []Remote `json:"remotes"`
-}
-
 func LoadRemotes(filePath string) (Remotes, error) {
 	file, err := os.Open(filePath)
 	if err != nil {

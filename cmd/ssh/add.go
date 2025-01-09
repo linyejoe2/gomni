@@ -1,4 +1,4 @@
-package cmd
+package ssh
 
 import (
 	"fmt"
@@ -68,7 +68,7 @@ func addRemote(ip, name, username, password, keyFile string) error {
 }
 
 func init() {
-	sshCmd.AddCommand(addCmd)
+	SshCmd.AddCommand(addCmd)
 
 	// 設定 flags
 	addCmd.Flags().StringVarP(&username, "username", "u", "", "Username for SSH")
