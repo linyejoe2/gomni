@@ -3,7 +3,9 @@ package utils
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"regexp"
+	"strings"
 )
 
 // Check the file with filepath exist or not, if not, create one with default value.
@@ -33,4 +35,18 @@ func CheckFileAndCreateWithDefaultValue(filepath string, defaultValue string) er
 	}
 
 	return nil
+}
+
+func CheckSSHRemoteAlive(ip string) bool {
+	out, err := exec.Command("nc", "-vzw", "1", ip, "22").CombinedOutput()
+	if err != nil {
+		return false
+	}
+	return strings.Contains(string(out), "succeeded")
+}
+
+func ClearStdOutPreLine(line int) {
+	for i := 0; i < line; i++ {
+		fmt.Print("\x1b[k")
+	}
 }
