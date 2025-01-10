@@ -34,14 +34,15 @@ func createPrintList(remotes []utils.Remote) (list []string) {
 	yellow := color.New(color.FgYellow).SprintFunc()
 
 	for _, remote := range remotes {
-		list = append(list, remote.Name+"\t "+remote.IP+"\t "+remote.Auth.Username+"\t "+yellow("panding"))
+		list = append(list, remote.Name+"\t "+remote.IP+"\t "+remote.Auth.Username+"\t "+yellow("panding")+"\t ")
 	}
 
 	return
 }
 
 func fPrintHelper(w *tabwriter.Writer, list []string) {
-	fmt.Fprintln(w, "NAME\t IP\t USERNAME\t STATUS\t")
+	white := color.New(color.FgWhite).SprintFunc()
+	fmt.Fprintln(w, "NAME\t IP\t USERNAME\t "+white("STATUS")+"\t")
 
 	for _, s := range list {
 		fmt.Fprintln(w, s)
@@ -51,7 +52,7 @@ func fPrintHelper(w *tabwriter.Writer, list []string) {
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "List all avaliable remotes",
+	Short: "List all avaliable remotes.",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		remotes, err := listRemote()
@@ -60,7 +61,7 @@ var listCmd = &cobra.Command{
 			return
 		}
 
-		w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.Debug)
+		w := tabwriter.NewWriter(os.Stdout, 0, 1, 2, ' ', tabwriter.Debug)
 
 		red := color.New(color.FgRed).SprintFunc()
 		green := color.New(color.FgGreen).SprintFunc()
@@ -79,7 +80,7 @@ var listCmd = &cobra.Command{
 				status = red("offline")
 			}
 
-			printList = append(append(printList[:i], remote.Name+"\t "+remote.IP+"\t "+remote.Auth.Username+"\t "+status), printList[i+1:]...)
+			printList = append(append(printList[:i], remote.Name+"\t "+remote.IP+"\t "+remote.Auth.Username+"\t "+status+"\t"), printList[i+1:]...)
 
 			utils.ClearStdOutPreLine(len(remotes) + 1)
 
