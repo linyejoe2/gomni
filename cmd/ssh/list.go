@@ -57,6 +57,7 @@ var listCmd = &cobra.Command{
 		remotes, err := listRemote()
 		if err != nil {
 			fmt.Println("Can't list remotes: ", err)
+			return
 		}
 
 		w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.Debug)
