@@ -49,4 +49,6 @@ func init() {
 	// RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	RootCmd.AddCommand(ssh.SshCmd)
+
+	RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 }

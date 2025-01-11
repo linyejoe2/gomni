@@ -13,6 +13,19 @@
 + **Delete SSH remotes** by hostname or IP address.
 + **List all available remotes** with their status (online/offline).
 
+## Installation
+
+You can use the quick install script with
+
+```bash
+curl -O https://github.com/linyejoe2/gomni/releases/download/v0.1.2/gomni-v0.1.2.tar.gz
+curl -o- https://github.com/linyejoe2/gomni/releases/download/v0.1.2/install-completion.sh | bash
+# chmod +x install-completion.sh
+# ./install-completion.sh
+```
+
+Or you can install `gomni` directly by download tarball or zip file from [source](https://github.com/linyejoe2/gomni/releases) page.
+
 ## Usage
 
 ### SSH Commands
