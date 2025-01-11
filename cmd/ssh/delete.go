@@ -11,13 +11,13 @@ import (
 var deleteCmd = &cobra.Command{
 	Use: `delete <remote name | ip>
 
-	💡example:
-	 + let assume that you have remote list 
-	NAME             | IP            | USERNAME	| STATUS   |
-	my-pc            | 127.0.0.1	 | user		| online   |
-	 + you can delete my-pc by:
-	  + gomni ssh delete my-pc
-	  + gomni ssh delete 127.0.0.1
+💡example:
+ + let assume that you have remote list 
+NAME             | IP            | USERNAME	| STATUS   |
+my-pc            | 127.0.0.1	 | user		| online   |
+ + you can delete my-pc by:
+  + gomni ssh delete my-pc
+  + gomni ssh delete 127.0.0.1
 	`,
 	Short: "Delete specify remote.",
 	Args:  cobra.ExactArgs(1),

@@ -46,16 +46,16 @@ func isValidPrivateKey(content []byte) bool {
 var addCmd = &cobra.Command{
 	Use: `add <ip> -n <hostname> -u <username> -p <password> or -i <certificate file>
 
-	💡example:
-	 + with password: gomni ssh add 127.0.0.1 -n my-pc -u user -p 1234
-	 + with certificate file: gomni ssh add 127.0.0.1 -n my-pc -u user -i ~/.ssh/id_rsa
+💡example:
+ + with password: gomni ssh add 127.0.0.1 -n my-pc -u user -p 1234
+ + with certificate file: gomni ssh add 127.0.0.1 -n my-pc -u user -i ~/.ssh/id_rsa
 
-	❗note:
-	 + do not use reserved word like "add, delete, list" as hostname, because those word will cause panic error!
-	 + if you use certificate, you must add public key to server first, 
-	   or ssh will eithre fall back to use password (if password log-in is supported), 
-	   or print fail message and close.
-	 + certificate file is private key, not public key!
+❗note:
+ + do not use reserved word like "add, delete, list" as hostname, because those word will cause panic error!
+ + if you use certificate, you must add public key to server first, 
+   or ssh will eithre fall back to use password (if password log-in is supported), 
+   or print fail message and close.
+ + certificate file is private key, not public key!
 	`,
 	Short: "Add a new SSH remote.",
 	Args:  cobra.ExactArgs(1),
