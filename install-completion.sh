@@ -46,20 +46,30 @@ echo "Installing gomni completion for $SHELL_TYPE..."
 
 case $SHELL_TYPE in
     bash)
-		echo -e "\n\nexport PATH=\$PATH:\$HOME/.gomni/bin" | tee -a ~/.bashrc
+        if ! grep -q 'export PATH=\$PATH:\$HOME/.gomni/bin' ~/.bashrc; then
+            echo -e "\n\nexport PATH=\$PATH:\$HOME/.gomni/bin" | tee -a ~/.bashrc
+        fi
+        if ! grep -q 'source ~/.gomni/completion' ~/.bashrc; then
+            echo -e "\nsource ~/.gomni/completion" | tee -a ~/.bashrc
+        fi
         gomni completion bash > ~/.gomni/completion
         source ~/.gomni/completion
         echo "Bash completion installed successfully."
         ;;
     zsh)
-		echo -e "\n\nexport PATH=\$PATH:\$HOME/.gomni/bin" | tee -a ~/.zshrc
+        if ! grep -q 'export PATH=\$PATH:\$HOME/.gomni/bin' ~/.zshrc; then
+            echo -e "\n\nexport PATH=\$PATH:\$HOME/.gomni/bin" | tee -a ~/.zshrc
+        fi
         gomni completion zsh > "${fpath[1]}/_gomni"
         echo "Zsh completion installed successfully. Restart your shell to apply changes."
         ;;
     fish)
-		echo "add PATH=$PATH:\"$HOME/.gomni/bin\" to your PATH variable."
+        if ! grep -q 'add PATH=$PATH:"$HOME/.gomni/bin"' ~/.config/fish/config.fish; then
+            echo "add PATH=$PATH:\"$HOME/.gomni/bin\" to your PATH variable."
+        fi
         gomni completion fish > ~/.config/fish/completions/gomni.fish
         echo "Fish completion installed successfully."
         ;;
 esac
+
 
