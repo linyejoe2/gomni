@@ -24,7 +24,7 @@ jobs:
       - name: Build project
         run: |
           go mod tidy
-          go build -o gomni # 假設你的 main package 在 ./cmd/gomni
+          CGO_ENABLED=0 go build -o gomni # 假設你的 main package 在 ./cmd/gomni
 
       # 4. Create zip archive and tarball of the binary
       - name: Create zip and tarball archive
