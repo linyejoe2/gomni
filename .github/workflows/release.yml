@@ -30,20 +30,6 @@ jobs:
       - name: Create zip archive
         run: zip gomni-v${{ github.ref_name }}.zip gomni
 
-      # 5. Upload Release Assets
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: gomni-v${{ github.ref_name }}.zip
-          asset_name: gomni-v${{ github.ref_name }}.zip
-          asset_content_type: application/zip
-
-  create_release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
       # 1. Create a release
       - name: Create GitHub Release
         id: create_release
@@ -55,4 +41,13 @@ jobs:
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
+
+      # 5. Upload Release Assets
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: gomni-v${{ github.ref_name }}.zip
+          asset_name: gomni-v${{ github.ref_name }}.zip
+          asset_content_type: application/zip
 
