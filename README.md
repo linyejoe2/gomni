@@ -6,6 +6,12 @@
 
 ## Features
 
+### v0.1.2: Quick install
+
+see [installation](/#Installation)
+
+### v0.1.1: Hot fix for command "ssh list" reflash terminal output.
+
 ### v0.1.0: SSH Client
 
 + **Connect to SSH remotes** using either hostnames or IP addresses.
