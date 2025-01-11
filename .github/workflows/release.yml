@@ -28,7 +28,7 @@ jobs:
 
       # 4. Create zip archive of the binary
       - name: Create zip archive
-        run: zip gomni-v${{ github.ref_name }}.zip gomni
+        run: zip gomni-${{ github.ref_name }}.zip gomni
 
       # 1. Create a release
       - name: Create GitHub Release
@@ -45,9 +45,11 @@ jobs:
       # 5. Upload Release Assets
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: gomni-v${{ github.ref_name }}.zip
-          asset_name: gomni-v${{ github.ref_name }}.zip
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: gomni-${{ github.ref_name }}.zip
+          asset_name: gomni-${{ github.ref_name }}.zip
           asset_content_type: application/zip
 
