@@ -47,6 +47,7 @@ func CheckSSHRemoteAlive(ip string) bool {
 
 func ClearStdOutPreLine(line int) {
 	for i := 0; i < line; i++ {
-		fmt.Print("\x1b[k")
+		fmt.Print("\x1b[F\x1b[2K")
 	}
+	// fmt.Print("\x1b[1B")
 }
