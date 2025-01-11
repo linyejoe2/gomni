@@ -50,5 +50,6 @@ func init() {
 
 	RootCmd.AddCommand(ssh.SshCmd)
 
-	RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
+	// RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
+	RootCmd.Root().CompletionOptions.HiddenDefaultCmd = true
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the target directory where the file will be extracted
-TARGET_DIR="$HOME/.gomin/bin"
+TARGET_DIR="$HOME/.gomni/bin"
 
 # Check if there is a gomni-v*.tar.gz file in the current directory
 TAR_FILE=$(ls gomni-v*.tar.gz 2> /dev/null)
