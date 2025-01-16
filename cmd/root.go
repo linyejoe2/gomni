@@ -4,11 +4,15 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/linyejoe2/gomni/cmd/ssh"
 	"github.com/spf13/cobra"
 )
+
+var versionFlag bool
+var version string = "dev"
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
@@ -23,6 +27,13 @@ feature:
 
 for more please see https://github.com/linyejoe2/gomni
 	`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if versionFlag {
+			println("gomni", version)
+			return nil
+		}
+		return fmt.Errorf("")
+	},
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -49,6 +60,8 @@ func init() {
 	// RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	RootCmd.AddCommand(ssh.SshCmd)
+
+	RootCmd.Flags().BoolVarP(&versionFlag, "version", "v", false, "use to check the version of this tool.")
 
 	// RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 	RootCmd.Root().CompletionOptions.HiddenDefaultCmd = true

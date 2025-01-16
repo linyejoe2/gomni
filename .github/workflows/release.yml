@@ -20,11 +20,17 @@ jobs:
         with:
           go-version: '1.23' # 修改為你專案使用的 Go 版本
 
+      - name: Get the version from the tag
+        id: vars
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
       # 3. Build the Go project
       - name: Build project
         run: |
           go mod tidy
-          CGO_ENABLED=0 go build -o gomni # 假設你的 main package 在 ./cmd/gomni
+          # go build -o gomni # 假設你的 main package 在 ./cmd/gomni
+          GOOS=windows GOARCH=amd64 go build -ldflags "-X github.com/linyejoe2/gomni/cmd.version=${{ env.VERSION }}" -o gomni.exe
+          CGO_ENABLED=0 go build -ldflags "-X github.com/linyejoe2/gomni/cmd.version=${{ env.VERSION }}" -o gomni
 
       # 4. Create zip archive and tarball of the binary
       - name: Create zip and tarball archive
