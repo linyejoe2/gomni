@@ -1,7 +1,7 @@
 /*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
+Copyright © 2025 linyejoe2 <linyejoe2@gmail.com>
 */
+
 package main
 
 import "github.com/linyejoe2/gomni/cmd"
