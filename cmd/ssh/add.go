@@ -73,6 +73,7 @@ var addCmd = &cobra.Command{
 
 		if password == "" && keyFile == "" {
 			fmt.Println("Invalid input, must provide either password with -p flag or certificate with -i flag.")
+			return
 		}
 
 		if password != "" {

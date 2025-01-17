@@ -10,7 +10,8 @@ import (
 
 // Check the file with filepath exist or not, if not, create one with default value.
 func CheckFileAndCreateWithDefaultValue(filepath string, defaultValue string) error {
-	filepathSeprator := regexp.MustCompile(`^(.+)\/([^\/]+)$`)
+	// filepathSeprator := regexp.MustCompile(`^(.+)\/([^\/]+)$`)
+	filepathSeprator := regexp.MustCompile(`^(.+)[\/\\]([^\/\\]+)$`)
 	match := filepathSeprator.FindStringSubmatch(filepath)
 	path := match[1]
 	// file := match[2]

@@ -32,6 +32,8 @@ func GetFilePath() (path string) {
 	homeDir, _ := os.UserHomeDir()
 	path = filepath.Join(homeDir, ".gomni", "ssh", "remote.json")
 
+	// println("path:", path)
+
 	err := CheckFileAndCreateWithDefaultValue(path, "{\"remotes\":[]}")
 	if err != nil {
 		panic(err)
