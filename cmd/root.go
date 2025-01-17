@@ -4,7 +4,6 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/linyejoe2/gomni/cmd/ssh"
@@ -27,12 +26,13 @@ feature:
 
 for more please see https://github.com/linyejoe2/gomni
 	`,
-	RunE: func(cmd *cobra.Command, args []string) error {
+	Run: func(cmd *cobra.Command, args []string) {
 		if versionFlag {
 			println("gomni", version)
-			return nil
+			return
 		}
-		return fmt.Errorf("")
+		println(cmd.UsageString())
+		return
 	},
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
